@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 set -ueo pipefail
 
 NAME="$(node -e 'console.log(require("./manifest.json").name)')"

@@ -33,8 +33,12 @@ const on_compose_start = async (tab, win)=>{
     // REPLY ALL AS CC BEHAVIOR
     if (is_reply(msg) && msg.to.length>1)
     {
+        var originalMessage = await tb.messages.get(msg.relatedMessageId);
+        var originalRecipient = originalMessage.recipients.at(0);
+
         await tb.compose.setComposeDetails(tab.id, {
             to: [msg.to[0]],
+            replyTo: [originalRecipient],
             cc: [...msg.to.slice(1), ...msg.cc],
         });
         msg = await tb.compose.getComposeDetails(tab.id);
